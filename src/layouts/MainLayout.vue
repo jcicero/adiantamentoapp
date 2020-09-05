@@ -57,15 +57,15 @@ const linksData = [
   },
   {
     title: 'Processos',
-    caption: 'Cadastro de processos',
+    caption: 'Listagem de processos',
     icon: 'book',
     link: '#/processo'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
+    title: 'Cadastrar Processo',
+    caption: 'Cadastro',
     icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    link: '#/cadprocesso'
   },
   {
     title: 'Forum',
