@@ -1,23 +1,20 @@
 <template>
   <q-page padding>
     <div class="q-pa-md row items-start q-gutter-md">
-          <q-card
-            class="my-card"
-            v-for="processo in processos"
-            :key="processo.id"
-          >
+          <q-card class="my-card" v-for="processo in processos" :key="processo.id">
             <q-card flat bordered class="my-card bg-grey-1">
               <q-card-section>
                 <div class="row items-center no-wrap">
                   <div class="col">
                     <div class="text-h6 text-center">{{ processo.processo }}</div>
                     <br><q-separator inset /><br>
-                    <div class="text-subtitle2">
-                      Valor:
-                      {{ processo.valor | formatValue() }}
+                    <div class="text-subtitle2 text-center">
+                      Valor: {{ processo.valor | formatValue() }}
                       </div>
-                    <div class="text-subtitle2">
-                      Liberado em: {{ processo.data | formatData() }}
+                      <br>
+                    <div class="text-subtitle2 text-center">
+                      Período para compras: {{ processo.data | formatData() }}
+                      a {{ processo.data | addDays() }}
                     </div>
                   </div>
                 </div>
@@ -100,6 +97,7 @@
 
 <script>
 import { date } from 'quasar'
+
 export default {
   name: 'Processo',
   data () {
@@ -120,6 +118,9 @@ export default {
     },
     formatData (value) {
       return date.formatDate(value, 'DD/MM/YYYY')
+    },
+    addDays (newDate) {
+      return date.formatDate(date.addToDate(newDate, { days: 29 }), 'DD/MM/YYYY')
     }
   },
 
