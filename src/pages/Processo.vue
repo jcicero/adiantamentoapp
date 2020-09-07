@@ -40,6 +40,7 @@
                 round
                 color="blue"
                 icon="remove_red_eye"
+                @click="$router.push('adiantamento')"
               />
               <q-btn
                 flat
