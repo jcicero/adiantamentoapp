@@ -130,7 +130,7 @@ export default {
       this.$axios
         .get('http://adiantamento.test/api/adiantamento')
         .then(res => {
-          this.processos = res.data.data
+          this.processos = res.data.adiantamento
         })
         .catch(err => {
           console.error(err)
