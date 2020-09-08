@@ -7,6 +7,11 @@
     />
     <q-input
       outlined
+      v-model="danfe.valor"
+      label="Valor total da NF"
+    />
+    <q-input
+      outlined
       v-model="danfe.data"
       mask="####/##/##"
       label="Data">
@@ -118,6 +123,7 @@ export default {
         .post('http://adiantamento.test/api/danfe', {
           nf: this.danfe.nf,
           data: this.danfe.data,
+          valor: this.danfe.valor,
           fornecedor_id: this.danfe.fornecedor_id,
           adiantamento_id: this.danfe.adiantamento_id,
           user_id: this.danfe.user_id
@@ -143,7 +149,7 @@ export default {
       this.$axios
         .get('http://adiantamento.test/api/fornecedor')
         .then(res => {
-          this.fornecedor = res.data.fornecedor
+          this.fornecedor = res.data
         })
         .catch(err => {
           console.error(err)
