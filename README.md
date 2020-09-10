@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Controle de Adiantamento (adiantamentoapp)
 
 Controlar os gastos com adiantamento
@@ -24,3 +25,6 @@ quasar build
 
 ### Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+=======
+# adiantamentoapp
+>>>>>>> 3cff8bb8f4def3018b017343a8aadbd8ab1c530a
