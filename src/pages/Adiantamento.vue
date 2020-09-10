@@ -1,5 +1,15 @@
 <template>
   <q-page padding>
+    <q-select
+      outlined
+      v-model="danfe.fornecedor_id"
+      :options="fornecedor"
+      option-value="id"
+      option-label="nome"
+      label="Fornecedor"
+      emit-value
+      map-options
+    />
     <q-input
       outlined
       v-model="danfe.nf"
@@ -33,65 +43,43 @@
         </template>
     </q-input>
 
-    <q-select
-      outlined
-      v-model="danfe.fornecedor_id"
-      :options="fornecedor"
-      option-value="id"
-      option-label="nome"
-      label="Fornecedor"
-      emit-value
-      map-options
-      />
-    <q-input
-      outlined
-      v-model="danfe.adiantamento_id"
-      label="Adiantamento"
-    />
     <q-input
       outlined
       v-model="danfe.user_id"
       label="Usuario"
     />
-
       <q-btn
         outlined
         color="primary"
         label="Salvar"
         @click.stop.prevent="postDanfe()"
       />
-
-  <div class="q-pa-md">
-    <q-table
-      title="Notas Fiscais"
-      :data="danfes"
+    <table-list
+      :titulo="titulo"
+      :data="data"
       :columns="columns"
       :filter="filter"
-      row-key="name"
-    >
-          <template v-slot:top-right>
-        <q-input outlined dense debounce="300" color="primary" v-model="filter">
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-      </template>
-    </q-table>
-  </div>
+    />
   </q-page>
 </template>
 
 <script>
+import TableList from 'components/TableList'
 export default {
   name: 'Adiantamento',
+  components: {
+    'table-list': TableList
+  },
   data () {
     return {
+      titulo: 'Notas Fiscais',
       danfe: [],
-      danfes: [
+      data: [
         {
           nf: '',
           nome: '',
-          data: ''
+          data: '',
+          valor: ''
         }
       ],
       fornecedor: [],
@@ -107,7 +95,8 @@ export default {
           sortable: true
         },
         { name: 'nf', align: 'center', label: 'NF', field: 'nf', sortable: true },
-        { name: 'nome', align: 'center', label: 'Fornecedor', field: 'nome', sortable: true }
+        { name: 'nome', align: 'center', label: 'Fornecedor', field: 'nome', sortable: true },
+        { name: 'valor', align: 'center', label: 'Valor', field: 'valor', sortable: true }
       ]
     }
   },
@@ -125,7 +114,7 @@ export default {
           data: this.danfe.data,
           valor: this.danfe.valor,
           fornecedor_id: this.danfe.fornecedor_id,
-          adiantamento_id: this.danfe.adiantamento_id,
+          adiantamento_id: this.$route.params.id,
           user_id: this.danfe.user_id
         })
         .then(res => {})
@@ -136,9 +125,9 @@ export default {
 
     getDanfe () {
       this.$axios
-        .get('http://adiantamento.test/api/danfe')
+        .get('http://adiantamento.test/api/adiantamento/' + this.$route.params.id + '/edit')
         .then(res => {
-          this.danfes = res.data
+          this.data = res.data
         })
         .catch(err => {
           console.error(err)

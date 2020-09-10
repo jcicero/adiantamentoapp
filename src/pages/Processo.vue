@@ -40,7 +40,7 @@
                 round
                 color="blue"
                 icon="remove_red_eye"
-                @click="$router.push('adiantamento')"
+                @click="$router.push(`adiantamento/${processo.id}`)"
               />
               <q-btn
                 flat

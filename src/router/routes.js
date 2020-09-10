@@ -8,7 +8,7 @@ const routes = [
       { path: 'Processo', component: () => import('pages/Processo.vue') },
       { path: 'cadprocesso', component: () => import('pages/CadProcesso.vue') },
       { path: 'danfe', component: () => import('pages/Danfe.vue') },
-      { path: 'adiantamento', component: () => import('pages/Adiantamento.vue') }
+      { path: 'adiantamento/:id', component: () => import('pages/Adiantamento.vue') }
 
     ]
   },
