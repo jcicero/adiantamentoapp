@@ -15,6 +15,13 @@
           </template>
         </q-input>
       </template>
+      <template v-slot:bottom-row>
+        <q-tr>
+          <q-td colspan="100%">
+            TOTAL: {{ valorTotal.toFixed(2) }}
+          </q-td>
+        </q-tr>
+      </template>
     </q-table>
   </div>
   </div>
@@ -23,6 +30,6 @@
 <script>
 export default {
   name: 'TableList',
-  props: ['titulo', 'data', 'columns', 'filter']
+  props: ['titulo', 'data', 'columns', 'filter', 'valorTotal']
 }
 </script>

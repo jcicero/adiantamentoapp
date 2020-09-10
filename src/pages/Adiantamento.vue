@@ -67,12 +67,14 @@
       :data="data"
       :columns="columns"
       :filter="filter"
+      :valorTotal="valorTotal"
     />
   </q-page>
 </template>
 
 <script>
 import TableList from 'components/TableList'
+
 export default {
   name: 'Adiantamento',
   components: {
@@ -112,6 +114,14 @@ export default {
   mounted () {
     this.getDanfe()
     this.getFornecedor()
+  },
+
+  computed: {
+    valorTotal () {
+      return this.data.reduce((sum, data) => {
+        return (sum + data.valor)
+      }, 0)
+    }
   },
 
   methods: {
