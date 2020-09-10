@@ -10,38 +10,46 @@
       emit-value
       map-options
     />
-    <q-input
-      outlined
-      v-model="danfe.nf"
-      label="Número da Nota Fiscal"
-    />
-    <q-input
-      outlined
-      v-model="danfe.valor"
-      label="Valor total da NF"
-    />
-    <q-input
-      outlined
-      v-model="danfe.data"
-      mask="####/##/##"
-      label="Data">
-        <template v-slot:append>
-          <q-icon
-            name="event"
-            class="cursor-pointer">
-            <q-popup-proxy
-              ref="qDateProxy"
-              transition-show="scale"
-              transition-hide="scale">
-              <q-date
-                v-model="danfe.data"
-                @input="() => $refs.qDateProxy.hide()"
-                mask="YYYY/MM/DD"
-              />
-            </q-popup-proxy>
-          </q-icon>
-        </template>
-    </q-input>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <q-input
+          outlined
+          v-model="danfe.nf"
+          label="Número da Nota Fiscal"
+        />
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <q-input
+          outlined
+          v-model="danfe.valor"
+          label="Valor total da NF"
+        />
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <q-input
+          outlined
+          v-model="danfe.data"
+          mask="####/##/##"
+          label="Data">
+            <template v-slot:append>
+              <q-icon
+                name="event"
+                class="cursor-pointer">
+                <q-popup-proxy
+                  ref="qDateProxy"
+                  transition-show="scale"
+                  transition-hide="scale">
+                  <q-date
+                    v-model="danfe.data"
+                    @input="() => $refs.qDateProxy.hide()"
+                    mask="YYYY/MM/DD"
+                  />
+                </q-popup-proxy>
+              </q-icon>
+            </template>
+        </q-input>
+      </div>
+    </div>
 
     <q-input
       outlined
