@@ -62,7 +62,7 @@
         label="Salvar"
         @click.stop.prevent="postDanfe()"
       />
-    <table-list
+    <table-list v-if="renderComponent"
       :titulo="titulo"
       :data="data"
       :columns="columns"
@@ -83,6 +83,7 @@ export default {
   data () {
     return {
       titulo: 'Notas Fiscais',
+      renderComponent: true,
       danfe: [],
       data: [
         {
@@ -141,6 +142,7 @@ export default {
           this.danfe.valor = ''
           this.danfe.fornecedor_id = ''
           this.danfe.user_id = ''
+          this.forceRerender()
         })
         .catch(err => {
           console.error(err)
@@ -167,6 +169,15 @@ export default {
         .catch(err => {
           console.error(err)
         })
+    },
+
+    forceRerender () {
+      this.renderComponent = false
+
+      this.$nextTick(() => {
+        this.renderComponent = true
+        this.getDanfe()
+      })
     }
   }
 }
