@@ -135,7 +135,13 @@ export default {
           adiantamento_id: this.$route.params.id,
           user_id: this.danfe.user_id
         })
-        .then(res => {})
+        .then(res => {
+          this.danfe.nf = ''
+          this.danfe.data = ''
+          this.danfe.valor = ''
+          this.danfe.fornecedor_id = ''
+          this.danfe.user_id = ''
+        })
         .catch(err => {
           console.error(err)
         })

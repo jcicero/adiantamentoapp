@@ -18,7 +18,7 @@
       <template v-slot:bottom-row>
         <q-tr>
           <q-td colspan="100%">
-            TOTAL: {{ valorTotal.toFixed(2) }}
+            TOTAL: R$ {{ valorTotal.toFixed(2) }}
           </q-td>
         </q-tr>
       </template>
