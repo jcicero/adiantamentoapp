@@ -74,6 +74,7 @@
 
 <script>
 import TableList from 'components/TableList'
+import { date } from 'quasar'
 
 export default {
   name: 'Adiantamento',
@@ -102,12 +103,19 @@ export default {
           label: 'Data',
           align: 'left',
           field: row => row.data,
-          format: val => `${val}`,
+          format: val => date.formatDate(`${val}`, 'DD/MM/YYYY'),
           sortable: true
         },
         { name: 'nf', align: 'center', label: 'NF', field: 'nf', sortable: true },
         { name: 'nome', align: 'center', label: 'Fornecedor', field: 'nome', sortable: true },
-        { name: 'valor', align: 'center', label: 'Valor', field: 'valor', sortable: true }
+        {
+          name: 'valor',
+          align: 'center',
+          label: 'Valor',
+          field: 'valor',
+          format: val => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(parseFloat(`${val}`)),
+          sortable: true
+        }
       ]
     }
   },

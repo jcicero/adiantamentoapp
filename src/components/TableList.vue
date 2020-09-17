@@ -1,6 +1,5 @@
 <template>
   <div class="q-pa-md">
-<div class="q-pa-md">
     <q-table
       title="Notas Fiscais"
       :data="data"
@@ -15,21 +14,26 @@
           </template>
         </q-input>
       </template>
+
       <template v-slot:bottom-row>
         <q-tr>
           <q-td colspan="100%">
-            TOTAL: R$ {{ valorTotal.toFixed(2) }}
+            TOTAL: {{ valorTotal | formatValue() }}
           </q-td>
         </q-tr>
       </template>
     </q-table>
-  </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'TableList',
-  props: ['titulo', 'data', 'columns', 'filter', 'valorTotal']
+  props: ['titulo', 'data', 'columns', 'filter', 'valorTotal'],
+  filters: {
+    formatValue (str) {
+      return (new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(str))
+    }
+  }
 }
 </script>
