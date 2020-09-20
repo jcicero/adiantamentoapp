@@ -15,7 +15,7 @@
     />
 
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
-      <q-btn fab icon="add" color="primary" @click.stop.prevent='showcards()' />
+      <q-btn fab icon="add" color="primary" @click.stop.prevent="showcards()" />
     </q-page-sticky>
   </q-page>
 </template>
