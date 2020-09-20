@@ -82,7 +82,7 @@ export default {
     postProcessos () {
       console.log(this.processos)
       this.$axios
-        .post('http://adiantamento.test/api/adiantamento', {
+        .post(this.$axios.baseURL + 'adiantamento', {
           processo: this.processo,
           responsavel: this.responsavel,
           data: this.data,
@@ -90,10 +90,19 @@ export default {
           status: this.status,
           user_id: this.user_id
         })
-        .then(res => {})
+        .then(res => {
+          this.triggerPositive()
+        })
         .catch(err => {
           console.error(err)
         })
+    },
+
+    triggerPositive () {
+      this.$q.notify({
+        type: 'positive',
+        message: 'Cadastrado com sucesso.'
+      })
     }
   }
 }

@@ -128,7 +128,7 @@ export default {
   methods: {
     getProcessos () {
       this.$axios
-        .get('http://adiantamento.test/api/adiantamento')
+        .get(this.$axios.baseURL + 'adiantamento')
         .then(res => {
           this.processos = res.data.adiantamento
         })
@@ -140,7 +140,7 @@ export default {
     dialogExcluir (id) {
       this.confirm = true
       this.$axios
-        .get('http://adiantamento.test/api/adiantamento/' + id)
+        .get(this.$axios.baseURL + 'adiantamento/' + id)
         .then(res => {
           this.proc = res.data
         })
@@ -151,7 +151,7 @@ export default {
 
     excluirProcessos (proc) {
       this.$axios
-        .delete('http://adiantamento.test/api/adiantamento/' + proc.id, {
+        .delete(this.$axios.baseURL + 'adiantamento/' + proc.id, {
           processo: this.processo,
           responsavel: this.responsavel,
           data: this.data,

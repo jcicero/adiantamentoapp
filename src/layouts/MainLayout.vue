@@ -59,13 +59,13 @@ const linksData = [
     title: 'Processos',
     caption: 'Listagem de processos',
     icon: 'book',
-    link: '#/processo'
+    link: '/processo'
   },
   {
     title: 'Cadastrar Processo',
     caption: 'Cadastro',
     icon: 'chat',
-    link: '#/cadprocesso'
+    link: '/cadprocesso'
   }
 ]
 
