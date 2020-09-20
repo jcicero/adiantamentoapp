@@ -3,6 +3,7 @@
 
     <form-danfe
       :showcard="showcard"
+      v-on:forceRenderer="forceRerender"
     />
 
     <table-list v-if="renderComponent"
@@ -33,6 +34,7 @@ export default {
   data () {
     return {
       titulo: 'Notas Fiscais',
+      quantidade: 0,
       renderComponent: true,
       danfe: [],
       showcard: false,

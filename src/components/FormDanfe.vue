@@ -195,7 +195,7 @@ export default {
           this.danfe.fornecedor_id = ''
           this.danfe.user_id = ''
           this.showcard = false
-          this.$emit.forceRerender()
+          this.$emit('forceRenderer')
           this.triggerPositive()
         })
         .catch(err => {
