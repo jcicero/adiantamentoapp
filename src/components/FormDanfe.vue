@@ -131,7 +131,14 @@
           :data="produtos"
           :columns="columns"
           row-key="name"
-        />
+        >
+        <template v-slot:body-cell-actions="props">
+          <q-td :props="props">
+            <q-btn dense round flat color="grey" @click="editRow(props)" icon="edit"></q-btn>
+            <q-btn dense round flat color="grey" @click="deleteRow(props)" icon="delete"></q-btn>
+          </q-td>
+        </template>
+        </q-table>
       </div>
       </q-card-section>
 
@@ -200,6 +207,12 @@ export default {
           field: 'unitario',
           label: 'Valor Unitário',
           sortable: true
+        },
+        {
+          name: 'actions',
+          label: 'Ações',
+          field: '',
+          align: 'center'
         }
       ]
     }
@@ -272,7 +285,6 @@ export default {
     },
 
     addProdutos () {
-      console.log(this.produtos)
       this.produtos.unshift({
         numero: this.numero++,
         descricao: this.descricaoField,
@@ -284,6 +296,10 @@ export default {
       this.descricaoField = ''
       this.quantidadeField = ''
       this.valorField = ''
+    },
+    deleteRow (props) {
+      const index = this.produtos.indexOf(props.row)
+      this.produtos.splice(index, 1)
     }
   }
 }
