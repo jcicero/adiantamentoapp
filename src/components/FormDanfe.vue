@@ -10,13 +10,27 @@
     <q-select
       outlined
       v-model="danfe.fornecedor_id"
-      :options="fornecedor"
+      :options="fornecedors"
       option-value="id"
       option-label="nome"
       label="Fornecedor"
       emit-value
       map-options
-    />
+      use-input
+      hide-selected
+      fill-input
+      @filter="filterFn"
+      input-debounce="0"
+    >
+      <template v-slot:no-option>
+        <q-item>
+          <q-item-section class="text-grey">
+            Sem resultados...
+          </q-item-section>
+        </q-item>
+      </template>
+    </q-select>
+
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-4">
         <q-input
@@ -158,7 +172,8 @@ export default {
 
   data () {
     return {
-      danfe: []
+      danfe: [],
+      fornecedors: []
     }
   },
 
@@ -196,6 +211,7 @@ export default {
           this.danfe.user_id = ''
           this.showcard = false
           this.$emit('forceRenderer')
+          this.$emit('showcards')
           this.triggerPositive()
         })
         .catch(err => {
@@ -207,6 +223,13 @@ export default {
       this.$q.notify({
         type: 'positive',
         message: 'Cadastrado com sucesso.'
+      })
+    },
+
+    filterFn (val, update, abort) {
+      update(() => {
+        const needle = val.toLowerCase()
+        this.fornecedors = this.fornecedor.filter(v => v.nome.toLowerCase().indexOf(needle) > -1)
       })
     }
   }

@@ -4,6 +4,7 @@
     <form-danfe
       :showcard="showcard"
       v-on:forceRenderer="forceRerender"
+      v-on:showcards="showcards"
     />
 
     <table-list v-if="renderComponent"
@@ -100,7 +101,6 @@ export default {
         .get(this.$axios.baseURL + 'adiantamento/' + this.$route.params.id + '/edit')
         .then(res => {
           this.data = res.data
-          console.log(this.data)
         })
         .catch(err => {
           console.error(err)
@@ -113,6 +113,7 @@ export default {
       this.$nextTick(() => {
         this.renderComponent = true
         this.getDanfe()
+        this.showcard()
       })
     },
 

@@ -3,4 +3,4 @@ import axios from 'axios'
 
 Vue.prototype.$axios = axios
 
-axios.baseURL = 'http://adiantamento-laravel.herokuapp.com/api/'
+axios.baseURL = 'http://adiantamento.test/api/'

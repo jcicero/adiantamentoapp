@@ -22,6 +22,14 @@
           </q-td>
         </q-tr>
       </template>
+
+      <template v-slot:column>
+        <q-tr>
+          <q-td colspan="100%">
+            TOTAL: {{ valorTotal | formatValue() }}
+          </q-td>
+        </q-tr>
+      </template>
     </q-table>
   </div>
 </template>
