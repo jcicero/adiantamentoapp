@@ -1,6 +1,10 @@
 <template>
   <q-page padding>
 
+    <card-processo
+      :titulo="titulo"
+    />
+
     <form-danfe
       :showcard="showcard"
       v-on:forceRenderer="forceRerender"
@@ -22,6 +26,7 @@
 </template>
 
 <script>
+import CardProcesso from 'components/CardProcesso'
 import FormDanfe from 'components/FormDanfe'
 import TableList from 'components/TableList'
 import { date } from 'quasar'
@@ -29,6 +34,7 @@ import { date } from 'quasar'
 export default {
   name: 'Adiantamento',
   components: {
+    'card-processo': CardProcesso,
     'table-list': TableList,
     'form-danfe': FormDanfe
   },
