@@ -130,7 +130,7 @@
         <q-table dense
           :data="produtos"
           :columns="columns"
-          row-key="name"
+          row-key="descricao"
         >
         <template v-slot:body-cell-actions="props">
           <q-td :props="props">
@@ -171,15 +171,7 @@ export default {
       descricaoField: '',
       quantidadeField: 0,
       valorField: 0,
-      numero: 1,
       columns: [
-        {
-          name: 'numero',
-          align: 'center',
-          label: '#',
-          field: 'numero',
-          sortable: true
-        },
         {
           name: 'descricao',
           align: 'center',
@@ -286,7 +278,6 @@ export default {
 
     addProdutos () {
       this.produtos.unshift({
-        numero: this.numero++,
         descricao: this.descricaoField,
         quantidade: this.quantidadeField,
         valor: this.valorField,
