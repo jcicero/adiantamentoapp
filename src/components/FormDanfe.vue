@@ -1,11 +1,11 @@
 <template>
     <q-card v-if="showcard" class="my-card">
+        <q-form @submit.prevent.stop="postDanfe" @reset.prevent.stop="onReset" class="q-gutter-md">
       <q-card-section>
         <b>Dados da Nota/Cupom Fiscal</b>
       </q-card-section>
 
         <q-separator />
-
       <q-card-section>
     <q-select
       outlined
@@ -35,15 +35,22 @@
       <div class="col-xs-12 col-sm-6 col-md-4">
         <q-input
           outlined
-          v-model="danfe.nf"
+          v-model.number="danfe.nf"
+          type="number"
           label="Número da Nota Fiscal"
         />
       </div>
       <div class="col-xs-12 col-sm-6 col-md-4">
         <q-input
           outlined
-          v-model="danfe.valor"
+          v-model.number="danfe.valor"
+          type="number"
           label="Valor total da NF"
+          :rules="
+          [
+            val => val !== null && val !== '' || 'Valor da NF é obrigatório',
+            val => val < 3200 || 'Valor está acima do permitido'
+          ]"
         />
       </div>
       <div class="col-xs-12 col-sm-6 col-md-4">
@@ -82,12 +89,17 @@
         <q-separator />
 
       <q-card-section>
+        <q-form
+          @submit.prevent.stop="addProdutos"
+          ref="formProd"
+        >
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-6">
           <q-input
             outlined
             v-model="descricaoField"
             label="Descrição do produto"
+            :rules="[val => val && val.length > 0 || 'Descrição do produto é obrigatória']"
           />
       </div>
       <div class="col-xs-12 col-sm-6 col-md-2">
@@ -96,6 +108,10 @@
             type="number"
             outlined
             label="Quantidade"
+            :rules="[
+              val => val !== null && val !== '' || 'Informe a quantidade',
+              val => val > 0 || 'Infome o valor'
+            ]"
           />
       </div>
       <div class="col-xs-12 col-sm-6 col-md-2">
@@ -104,6 +120,10 @@
             type="number"
             outlined
             label="Valor Total"
+            :rules="[
+              val => val !== null && val !== '' || 'Informe o valor total do item',
+              val => val > 0 || 'O valor precisa ser maior que 0'
+            ]"
           />
       </div>
       <div class="col-xs-12 col-sm-6 col-md-1">
@@ -122,7 +142,7 @@
           round
           color="primary"
           icon="add"
-          @click.stop.prevent="addProdutos"
+          type="submit"
         />
       </div>
     </div>
@@ -140,6 +160,7 @@
         </template>
         </q-table>
       </div>
+      </q-form>
       </q-card-section>
 
     <q-separator />
@@ -148,9 +169,10 @@
         outlined
         color="primary"
         label="Salvar"
-        @click.stop.prevent="postDanfe()"
+        type="submit"
       />
     </q-card-actions>
+        </q-form>
     </q-card>
 </template>
 
@@ -169,8 +191,8 @@ export default {
       fornecedors: [],
       produtos: [],
       descricaoField: '',
-      quantidadeField: 0,
-      valorField: 0,
+      quantidadeField: '',
+      valorField: '',
       columns: [
         {
           name: 'descricao',
@@ -284,14 +306,25 @@ export default {
         unitario: this.calcUnitario,
         id: Date.now()
       })
-      this.descricaoField = ''
-      this.quantidadeField = ''
-      this.valorField = ''
+      this.onReset()
     },
+
     deleteRow (props) {
       const index = this.produtos.indexOf(props.row)
       this.produtos.splice(index, 1)
+    },
+
+    async onReset () {
+      await this.resetProd()
+      this.$refs.formProd.resetValidation()
+    },
+
+    async resetProd () {
+      this.descricaoField = ''
+      this.quantidadeField = ''
+      this.valorField = ''
     }
+
   }
 }
 </script>
