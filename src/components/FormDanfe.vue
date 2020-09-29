@@ -1,6 +1,5 @@
 <template>
     <q-card v-if="showcard" class="my-card">
-        <q-form @submit.prevent.stop="postDanfe" @reset.prevent.stop="onReset" class="q-gutter-md">
       <q-card-section>
         <b>Dados da Nota/Cupom Fiscal</b>
       </q-card-section>
@@ -57,7 +56,8 @@
         <q-input
           outlined
           v-model="danfe.data"
-          mask="####/##/##"
+          mask="##/##/####"
+          unmasked-value
           label="Data">
             <template v-slot:append>
               <q-icon
@@ -71,6 +71,7 @@
                     v-model="danfe.data"
                     @input="() => $refs.qDateProxy.hide()"
                     mask="YYYY/MM/DD"
+                    unmasked-value
                   />
                 </q-popup-proxy>
               </q-icon>
@@ -78,7 +79,6 @@
         </q-input>
       </div>
     </div>
-
       </q-card-section>
 
         <q-separator />
@@ -169,10 +169,9 @@
         outlined
         color="primary"
         label="Salvar"
-        type="submit"
+        @click.prevent.stop="postDanfe"
       />
     </q-card-actions>
-        </q-form>
     </q-card>
 </template>
 
@@ -275,6 +274,7 @@ export default {
           this.danfe.fornecedor_id = ''
           this.danfe.user_id = ''
           this.showcard = false
+          this.produtos = []
           this.$emit('forceRenderer')
           this.$emit('showcards')
           this.triggerPositive()
