@@ -18,12 +18,15 @@
       outlined
       label="Valor do Adiantamento"
     />
-    <q-input
+    <q-field
     outlined
-    v-model="data"
-    mask="####/##/##"
+    mask="##/##/####"
     :rules="[checkDate]"
-    label="Data liberação">
+    label="Data liberação"
+    stack-label>
+        <template v-slot:control>
+          <div class="self-center full-width no-outline" tabindex="0">{{ data }}</div>
+        </template>
       <template v-slot:append>
         <q-icon
           name="event"
@@ -35,12 +38,14 @@
             <q-date
               v-model="data"
               @input="() => $refs.qDateProxy.hide()"
-              mask="YYYY/MM/DD"
+              mask="DD/MM/YYYY"
+              unmasked-value
+
             />
           </q-popup-proxy>
         </q-icon>
       </template>
-    </q-input>
+    </q-field>
     <q-select
       outlined
       v-model="status"

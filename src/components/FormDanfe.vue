@@ -53,12 +53,14 @@
         />
       </div>
       <div class="col-xs-12 col-sm-6 col-md-4">
-        <q-input
+        <q-field
           outlined
-          v-model="danfe.data"
           mask="##/##/####"
-          unmasked-value
-          label="Data">
+          label="Data"
+          stack-label>
+        <template v-slot:control>
+          <div class="self-center full-width no-outline" tabindex="0">{{ danfe.data }}</div>
+        </template>
             <template v-slot:append>
               <q-icon
                 name="event"
@@ -70,19 +72,17 @@
                   <q-date
                     v-model="danfe.data"
                     @input="() => $refs.qDateProxy.hide()"
-                    mask="YYYY/MM/DD"
+                    mask="DD/MM/YYYY"
                     unmasked-value
                   />
                 </q-popup-proxy>
               </q-icon>
             </template>
-        </q-input>
+        </q-field>
       </div>
     </div>
       </q-card-section>
-
         <q-separator />
-
       <q-card-section>
         <b>Incluir itens da Nota/Cupom Fiscal</b>
       </q-card-section>
@@ -274,6 +274,7 @@ export default {
           this.danfe.fornecedor_id = ''
           this.danfe.user_id = ''
           this.showcard = false
+          this.postProdutos()
           this.produtos = []
           this.$emit('forceRenderer')
           this.$emit('showcards')
@@ -282,6 +283,10 @@ export default {
         .catch(err => {
           console.error(err)
         })
+    },
+
+    postProdutos () {
+      console.log(this.produtos)
     },
 
     triggerPositive () {

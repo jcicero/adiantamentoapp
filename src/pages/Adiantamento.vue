@@ -119,7 +119,7 @@ export default {
       this.$nextTick(() => {
         this.renderComponent = true
         this.getDanfe()
-        this.showcard()
+        this.showcards()
       })
     },
 
